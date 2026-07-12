@@ -1,0 +1,417 @@
+{
+  "name": "AI Recruitment Copilot",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "AI Recruitment Copilot",
+        "formDescription": "Upload resumes for AI-based screening.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Recruiter Name",
+              "fieldName": "recruiter_name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Job Role",
+              "fieldName": "job_role",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Resume",
+              "fieldType": "file",
+              "fieldName": "resume",
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ef3fe1f3-e65b-4ff4-a16a-ab410f63d009",
+      "name": "On form submission",
+      "webhookId": "9638c29c-927e-40b1-8fb4-7f3627fb3e1b"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "resume",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "f07580d6-72dc-4b15-838f-d7ba5232075c",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1uxxujJ1dJSDOkEjcZQpXr5I4pPOFHeNr-nUvMKLGczo",
+          "mode": "list",
+          "cachedResultName": "Candidate Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxxujJ1dJSDOkEjcZQpXr5I4pPOFHeNr-nUvMKLGczo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxxujJ1dJSDOkEjcZQpXr5I4pPOFHeNr-nUvMKLGczo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Candidate Name": "={{$node[\"Code in JavaScript\"].json.candidate_name}}",
+            "Email": "={{$node[\"Code in JavaScript\"].json.email}}",
+            "Phone": "={{$node[\"Code in JavaScript\"].json.phone}}",
+            "Resume Sumary": "={{$node[\"Code in JavaScript\"].json.resume_summary}}",
+            "Match Score": "={{$node[\"Code in JavaScript\"].json.match_score}}",
+            "Recommendation": "={{$node[\"Code in JavaScript\"].json.recommendation}}",
+            "Missing Skills": "={{$node[\"Code in JavaScript\"].json.missing_skills.join(\", \")}}",
+            "Experience": "={{$node[\"Code in JavaScript\"].json.experience}}",
+            "AI Justification": "={{$node[\"Code in JavaScript\"].json.ai_justification}}",
+            "Skills": "={{$node[\"Code in JavaScript\"].json.skills.join(\", \")}}",
+            "Resume Link": "={{$json.webViewLink}}",
+            "Interview Questions": "={{$node[\"Code in JavaScript\"].json.interview_questions.join(\"\\n\")}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Candidate Name",
+              "displayName": "Candidate Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skills",
+              "displayName": "Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Match Score",
+              "displayName": "Match Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Recommendation",
+              "displayName": "Recommendation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Missing Skills",
+              "displayName": "Missing Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Experience",
+              "displayName": "Experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Interview Questions",
+              "displayName": "Interview Questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Resume Link",
+              "displayName": "Resume Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Resume Sumary",
+              "displayName": "Resume Sumary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AI Justification",
+              "displayName": "AI Justification",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1360,
+        0
+      ],
+      "id": "9f1ba9f6-2672-4627-9f33-6f58fd4724a9",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4HoN5YGiCrHaPhDt",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an AI Recruitment Assistant.\n\nAnalyze the following resume for the job role.\n\nJob Role:\n{{$('On form submission').item.json.job_role}}\n\nResume:\n{{$('Extract from File').item.json.text}}\n\nReturn ONLY valid JSON in this exact format:\n\n{\n  \"candidate_name\": \"\",\n  \"email\": \"\",\n  \"phone\": \"\",\n  \"skills\": [],\n  \"experience\": \"\",\n  \"match_score\": 0,\n  \"recommendation\": \"\",\n  \"missing_skills\": [],\n  \"interview_questions\": [],\n  \"resume_summary\": \"\",\n  \"ai_justification\": \"\"\n}\n\nRules:\n- match_score must be between 0 and 100.\n- recommendation must be one of:\n  \"Strong Hire\"\n  \"Hire\"\n  \"Consider\"\n  \"Reject\"\n- interview_questions must contain exactly 5 technical questions.\n- Return ONLY JSON.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        528,
+        0
+      ],
+      "id": "e1ec8bec-9c84-42fd-9fe2-6b2b9fbd42cd",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        384,
+        128
+      ],
+      "id": "72b0f448-4539-4d24-a77a-423c0b3df627",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "swHYETDcLAtNVwJX",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.text;\n\nconst cleaned = raw\n  .replace(/```json/g, \"\")\n  .replace(/```/g, \"\")\n  .trim();\n\nreturn [\n  {\n    json: JSON.parse(cleaned)\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        912,
+        0
+      ],
+      "id": "7d0a68f6-6d51-4574-adcc-83015830a9cd",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "resume",
+        "name": "={{$binary.resume.fileName}}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "13HY55WJ2sdxJuDeu1riksCTLTeCtFgCd",
+          "mode": "list",
+          "cachedResultName": "AI Recruitment Copilot",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/13HY55WJ2sdxJuDeu1riksCTLTeCtFgCd"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        352
+      ],
+      "id": "471d6097-f172-498c-9d33-a2c5f4b5378d",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "cKKGJdYgDWPfJ8NS",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1152,
+        112
+      ],
+      "id": "4c5388a8-8dd2-4907-9f2f-a9299700f77a",
+      "name": "Merge"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "133f8ada-b1c6-4802-88d6-16ef265ba3dd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "554e7fdb971b10caf666caaaec253dfaa217c3382c60be2dd0e6d244e5af78a6"
+  },
+  "nodeGroups": [],
+  "id": "M7kkcMeuHWqqKvr1",
+  "tags": []
+}
