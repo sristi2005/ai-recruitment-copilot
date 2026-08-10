@@ -280,6 +280,3 @@ The Google Sheets database stores fields such as:
 7. Map the Google Sheets columns to the workflow output.
 8. Test the workflow using the n8n form.
 9. Publish the workflow when testing is complete.
-
-That makes the repo look like an actual engineering project rather than just "I made an n8n workflow."
-```
